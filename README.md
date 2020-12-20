@@ -4,6 +4,9 @@
 - Community engagement based engineering --> intensively focus on product and service
 - Open source & open hardware --> a platform for anyone to learn about robotics and connect with people
 - Be open to new ideas and critiques
+- Design principle, simple (does advance technology like AI really neccessary?), feasible 
+
+
 
 
 * Disinfection Robot architechture
@@ -19,5 +22,5 @@
 - mostly rely on ultrasonic sensor for wall following/obstacle avoidance and infrard sensor for line following
 - Simulation software: Webot ( Cyber Robotics)
 
-###Please use the discussion board if you have any ideas/critques/ suggestions
-###feel free to send me an e-mail if you have any question --> guany27@mcmaster.ca
+### Please use the discussion board if you have any ideas/critques/suggestions
+### feel free to send me an e-mail if you have any question --> guany27@mcmaster.ca
