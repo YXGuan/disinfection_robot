@@ -1,0 +1,698 @@
+[
+    {
+        "id": "85a2f811.e0bc68",
+        "type": "tab",
+        "label": "SELECTABLE INPUT",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "e0daacb.27d715",
+        "type": "ui_ui_control",
+        "z": "85a2f811.e0bc68",
+        "name": "inject dash events",
+        "events": "all",
+        "x": 170,
+        "y": 110,
+        "wires": [
+            [
+                "6fbef64d.102838"
+            ]
+        ]
+    },
+    {
+        "id": "6fbef64d.102838",
+        "type": "link out",
+        "z": "85a2f811.e0bc68",
+        "name": "dash-init",
+        "links": [
+            "7814ed99.4469e4",
+            "a76db824.5b9918",
+            "6353ed7.633d414"
+        ],
+        "x": 305,
+        "y": 110,
+        "wires": []
+    },
+    {
+        "id": "5a58e278.7cc37c",
+        "type": "ui_gauge",
+        "z": "85a2f811.e0bc68",
+        "name": "",
+        "group": "2c9be6ec.70771a",
+        "order": 2,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "{{title}}",
+        "label": "",
+        "format": "{{value | number:2}}",
+        "min": 0,
+        "max": "30",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 810,
+        "y": 370,
+        "wires": []
+    },
+    {
+        "id": "6f4058b5.dd6c78",
+        "type": "function",
+        "z": "85a2f811.e0bc68",
+        "name": "create groups",
+        "func": "var g_members = [\"temperature\",\"Voltage\",\"CPU\"]\nvar g_limits = [{lo:0,hi:30},{lo:0,hi:100},{lo:0,hi:10}]\nvar g = {\"gaugegroup\":{\"members\":[],\"selected\":\"temperature\"}}\nfor(var i=0;i<g_members.length;i++){\n    g.gaugegroup.members.push( {\"topic\":g_members[i],\"lastvalue\":0,\"min\":g_limits[i].lo,\"max\":g_limits[i].hi})\n}\n\nglobal.set(\"buttongroups\",g)\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1be8e65e.c4a32a",
+        "type": "inject",
+        "z": "85a2f811.e0bc68",
+        "name": "init",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 60,
+        "wires": [
+            [
+                "6f4058b5.dd6c78"
+            ]
+        ]
+    },
+    {
+        "id": "3f332697.f8112a",
+        "type": "ui_button",
+        "z": "85a2f811.e0bc68",
+        "name": "temperature",
+        "group": "2c9be6ec.70771a",
+        "order": 1,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "label": "TEMPERATURE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "{{bgr}}",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "temperature",
+        "x": 520,
+        "y": 210,
+        "wires": [
+            [
+                "7f0068d6.6b7088"
+            ]
+        ]
+    },
+    {
+        "id": "2d39b0d1.40bbf",
+        "type": "switch",
+        "z": "85a2f811.e0bc68",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "temperature",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "humidity",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "wind",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 370,
+        "y": 250,
+        "wires": [
+            [
+                "3f332697.f8112a"
+            ],
+            [
+                "15773864.445e58"
+            ],
+            [
+                "507850f5.283df"
+            ]
+        ]
+    },
+    {
+        "id": "38ccea8b.e19b16",
+        "type": "function",
+        "z": "85a2f811.e0bc68",
+        "name": "get color",
+        "func": "var group = global.get(\"buttongroups.gaugegroup\")\nvar m\nfor(var i=0;i<group.members.length;i++){\n    m = {topic:group.members[i].topic}\n    m.bgr = group.members[i].topic == group.selected ? 'green' : 'gray'\n    node.send(m)\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 240,
+        "y": 250,
+        "wires": [
+            [
+                "2d39b0d1.40bbf"
+            ]
+        ]
+    },
+    {
+        "id": "7f0068d6.6b7088",
+        "type": "change",
+        "z": "85a2f811.e0bc68",
+        "name": "set selected",
+        "rules": [
+            {
+                "t": "set",
+                "p": "buttongroups.gaugegroup.selected",
+                "pt": "global",
+                "to": "topic",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 250,
+        "wires": [
+            [
+                "ca6c091b.76e568"
+            ]
+        ]
+    },
+    {
+        "id": "ca6c091b.76e568",
+        "type": "link out",
+        "z": "85a2f811.e0bc68",
+        "name": "gaugegroup out",
+        "links": [
+            "a76db824.5b9918",
+            "6353ed7.633d414"
+        ],
+        "x": 805,
+        "y": 250,
+        "wires": []
+    },
+    {
+        "id": "a76db824.5b9918",
+        "type": "link in",
+        "z": "85a2f811.e0bc68",
+        "name": "gaugegroup in",
+        "links": [
+            "ca6c091b.76e568",
+            "6fbef64d.102838"
+        ],
+        "x": 145,
+        "y": 250,
+        "wires": [
+            [
+                "38ccea8b.e19b16"
+            ]
+        ]
+    },
+    {
+        "id": "6353ed7.633d414",
+        "type": "link in",
+        "z": "85a2f811.e0bc68",
+        "name": "gauge in",
+        "links": [
+            "ca6c091b.76e568",
+            "6fbef64d.102838"
+        ],
+        "x": 415,
+        "y": 340,
+        "wires": [
+            [
+                "6e31ef5c.1d84f"
+            ]
+        ]
+    },
+    {
+        "id": "85745c48.d39fc",
+        "type": "inject",
+        "z": "85a2f811.e0bc68",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "2.45",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 420,
+        "wires": [
+            [
+                "2d72c269.742a8e"
+            ]
+        ]
+    },
+    {
+        "id": "9c565c3e.92a7e",
+        "type": "change",
+        "z": "85a2f811.e0bc68",
+        "name": "fake temp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$random()*28",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "temperature",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 380,
+        "wires": [
+            [
+                "2df1e6fc.5cdcca"
+            ]
+        ]
+    },
+    {
+        "id": "2d72c269.742a8e",
+        "type": "change",
+        "z": "85a2f811.e0bc68",
+        "name": "fake Voltage",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$random()*100",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "humidity",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 420,
+        "wires": [
+            [
+                "2df1e6fc.5cdcca"
+            ]
+        ]
+    },
+    {
+        "id": "c2ebdce7.db487",
+        "type": "change",
+        "z": "85a2f811.e0bc68",
+        "name": "fake CPU",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$random()*8",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "wind",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 460,
+        "wires": [
+            [
+                "2df1e6fc.5cdcca"
+            ]
+        ]
+    },
+    {
+        "id": "be311aa3.92b688",
+        "type": "inject",
+        "z": "85a2f811.e0bc68",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "3.7",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 180,
+        "y": 460,
+        "wires": [
+            [
+                "c2ebdce7.db487"
+            ]
+        ]
+    },
+    {
+        "id": "ee05b325.d0909",
+        "type": "inject",
+        "z": "85a2f811.e0bc68",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "1.3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 160,
+        "y": 380,
+        "wires": [
+            [
+                "9c565c3e.92a7e"
+            ]
+        ]
+    },
+    {
+        "id": "2df1e6fc.5cdcca",
+        "type": "function",
+        "z": "85a2f811.e0bc68",
+        "name": "store inactive & bypass active",
+        "func": "var group = global.get(\"buttongroups.gaugegroup\")\nif(group.selected != msg.topic){\n    var member = group.members.find(element => element.topic == msg.topic);\n    member.lastvalue = msg.payload\n    global.set(\"buttongroups.gaugegroup\",group)\n    return\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 390,
+        "wires": [
+            [
+                "5a58e278.7cc37c"
+            ]
+        ]
+    },
+    {
+        "id": "6e31ef5c.1d84f",
+        "type": "function",
+        "z": "85a2f811.e0bc68",
+        "name": "prepare after selection change",
+        "func": "var group = global.get(\"buttongroups.gaugegroup\")\nvar member = group.members.find(element => element.topic == group.selected);\nmsg.title = group.selected.toUpperCase()\nmsg.payload = member.lastvalue\nmsg.ui_control = {min:member.min,max:member.max}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 350,
+        "wires": [
+            [
+                "5a58e278.7cc37c"
+            ]
+        ]
+    },
+    {
+        "id": "15773864.445e58",
+        "type": "ui_button",
+        "z": "85a2f811.e0bc68",
+        "name": "Voltage",
+        "group": "2c9be6ec.70771a",
+        "order": 3,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "label": "Voltage",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "{{bgr}}",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "Voltage",
+        "x": 510,
+        "y": 250,
+        "wires": [
+            [
+                "7f0068d6.6b7088"
+            ]
+        ]
+    },
+    {
+        "id": "507850f5.283df",
+        "type": "ui_button",
+        "z": "85a2f811.e0bc68",
+        "name": "CPU",
+        "group": "2c9be6ec.70771a",
+        "order": 4,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "label": "CPU",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "{{bgr}}",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "CPU",
+        "x": 500,
+        "y": 290,
+        "wires": [
+            [
+                "7f0068d6.6b7088"
+            ]
+        ]
+    },
+    {
+        "id": "530befbe.f9b3c",
+        "type": "ui_switch",
+        "z": "85a2f811.e0bc68",
+        "name": "",
+        "label": "Emmergency switch",
+        "tooltip": "",
+        "group": "2c9be6ec.70771a",
+        "order": 4,
+        "width": "3",
+        "height": "2",
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 180,
+        "y": 540,
+        "wires": [
+            [
+                "76efe7c1.c56b18"
+            ]
+        ]
+    },
+    {
+        "id": "76efe7c1.c56b18",
+        "type": "ui_text",
+        "z": "85a2f811.e0bc68",
+        "group": "2c9be6ec.70771a",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 450,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "1e2c49b3.ce18a6",
+        "type": "ui_button",
+        "z": "85a2f811.e0bc68",
+        "name": "",
+        "group": "2c9be6ec.70771a",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "take picture",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 170,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aeb2b43b.4ac8f8",
+        "type": "ui_slider",
+        "z": "85a2f811.e0bc68",
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "group": "70b6b6d8.44c018",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "x": 540,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6806bf78.b8441",
+        "type": "ui_switch",
+        "z": "85a2f811.e0bc68",
+        "name": "",
+        "label": "enable",
+        "tooltip": "",
+        "group": "5886ee89.a0668",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 350,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "56d0a3dc.7f890c",
+        "type": "ui_button",
+        "z": "85a2f811.e0bc68",
+        "name": "",
+        "group": "5886ee89.a0668",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "forward",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "x": 360,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2c9be6ec.70771a",
+        "type": "ui_group",
+        "z": "",
+        "name": "test",
+        "tab": "966d12c9.39a86",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "70b6b6d8.44c018",
+        "type": "ui_group",
+        "z": "",
+        "name": "Default",
+        "tab": "478c8bde.23f6d4",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "5886ee89.a0668",
+        "type": "ui_group",
+        "z": "",
+        "name": "Manuel control",
+        "tab": "966d12c9.39a86",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "966d12c9.39a86",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Demo",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "478c8bde.23f6d4",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Controls",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
