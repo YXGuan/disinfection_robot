@@ -4,7 +4,7 @@
 - Community engagement based engineering --> intensively focus on product and service
 - Open source & open hardware --> a platform for anyone to learn about robotics and connect with people
 - Be open to new ideas and critiques
-- Design principle, simple (does advance technology like AI really neccessary?), feasible 
+- Design principle, simple , feasible 
 
 
 
