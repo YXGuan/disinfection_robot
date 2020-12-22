@@ -25,3 +25,9 @@
 ### [link for pictures and videos](https://drive.google.com/drive/folders/1CXR6q5mwqL5NxeNnCfcUFJ0lyBzkWC9R?usp=sharing)
 ### Please use the discussion board if you have any ideas/critques/suggestions
 ### feel free to send me an e-mail if you have any question --> guany27@mcmaster.ca
+
+
+
+- [x] chassis
+- [ ] Node- Red motor control + digital/ mosquito server
+- [ ] BlueTooth
