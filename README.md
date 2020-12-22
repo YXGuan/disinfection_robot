@@ -28,6 +28,7 @@
 
 
 
+# Todo list
 - [x] chassis
 - [ ] Node- Red motor control + digital/ mosquito server
 - [ ] BlueTooth
