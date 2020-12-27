@@ -19,6 +19,9 @@
 - mostly rely on ultrasonic sensor for wall following/obstacle avoidance and infrard sensor for line following
 - Simulation software: Webot ( Cyber Robotics)
 
+
+![image](C:\Users\GSOHO\Desktop\Picture1)
+
 ### [link for pictures and videos](https://drive.google.com/drive/folders/1CXR6q5mwqL5NxeNnCfcUFJ0lyBzkWC9R?usp=sharing)
 ### Please use the discussion board if you have any ideas/critques/suggestions
 ### feel free to send me an e-mail if you have any question --> guany27@mcmaster.ca
