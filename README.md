@@ -20,9 +20,12 @@
 - Simulation software: Webot ( Cyber Robotics)
 
 
-![image](C:\Users\GSOHO\Desktop\Picture1)
+![does this image show up properly?](C:\Users\GSOHO\Desktop\Picture1)
 
-### [link for pictures and videos](https://drive.google.com/drive/folders/1CXR6q5mwqL5NxeNnCfcUFJ0lyBzkWC9R?usp=sharing)
+
+### [link for a 1 min video](https://youtu.be/DklAGDz4AtY)
+### [link for raw picturesvideos](https://drive.google.com/drive/folders/1CXR6q5mwqL5NxeNnCfcUFJ0lyBzkWC9R?usp=sharing)
+### [link for literature review](https://docs.google.com/document/d/1W_xQn0CdwW78urU5YeByii7AZVh4l2zxzDyNEFPVSTU/edit?usp=sharing)
 ### Please use the discussion board if you have any ideas/critques/suggestions
 ### feel free to send me an e-mail if you have any question --> guany27@mcmaster.ca
 ### I will be in my ZOOM meeting room every Sunday @ 8pm (EST) to [chat](https://mcmaster.zoom.us/j/2621494308)
@@ -30,6 +33,15 @@
 
 
 # Todo list
-- [ ] consider a more robust platform (6 wheels + Pi )
-- [ ] Node- Red + Digital Ocean --> control from anywhere
-- [ ] Navigation?????SOS? 
+- [ ]Linear actuator controlled sprayer 
+- [ ]Increase durability of the robot platform 
+- [ ]Different navigation approach  with bumper to increase safety
+- [ ]Bluetooth control 
+- [ ]Control the robot from a different network -- digital ocean server
+- [ ]Audio system
+- [ ]Wheel encoder, IMU sensor to increase precision
+- [ ]Battery monitoring
+- [ ]Strengthen Wifi signal
+- [ ]Auto docking/ recharging
+- [ ]Penetration Test
+
