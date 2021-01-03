@@ -33,15 +33,15 @@
 
 
 # Todo list
-[ ]Linear actuator controlled sprayer 
-- [ ]security: https + password login 
-- [ ]Increase durability of the robot platform 
-- [ ]Different navigation approach  with bumper to increase safety
-- [ ]Bluetooth control 
-- [ ]Control the robot from a different network -- digital ocean server
-- [ ]Audio system
-- [ ]Wheel encoder, IMU sensor to increase precision
-- [ ]Battery monitoring
-- [ ]Strengthen Wifi signal
-- [ ]Auto docking/ recharging
-- [ ]Penetration Test
+- [x] Linear actuator controlled sprayer 
+- [ ] security: https + password login 
+- [ ] Increase durability of the robot platform 
+- [ ] Different navigation approach  with bumper to increase safety
+- [ ] Bluetooth control 
+- [ ] Control the robot from a different network -- digital ocean server
+- [ ] Audio system
+- [ ] Wheel encoder, IMU sensor to increase precision
+- [ ] Battery monitoring
+- [ ] Strengthen Wifi signal
+- [ ] Auto docking/ recharging
+- [ ] Penetration Test
