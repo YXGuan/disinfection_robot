@@ -11,7 +11,7 @@
 ### Dend me an e-mail if you have any question / critiques / good ideas --> guany27@mcmaster.ca or book a [chat](https://calendly.com/gyx/30min)
 
 
-
-### [video](https://www.youtube.com/watch?v=QKO-qRm2GsA)
+------------------------------
+### [video presentation](https://www.youtube.com/watch?v=QKO-qRm2GsA)
 ###
 
