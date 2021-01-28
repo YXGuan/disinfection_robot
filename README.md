@@ -8,7 +8,7 @@
 -  allow the robot to disinfect by 1. remote control through wifi/ bluetooth 2. autonomous 
 
 ### Go to Issues and see what some problems you could work on
-### Dend me an e-mail if you have any question / critiques / ideas --> guany27@mcmaster.ca or book a [chat](https://calendly.com/gyx/30min)
+### Send me an e-mail if you have any question / critiques / ideas --> guany27@mcmaster.ca or book a [chat](https://calendly.com/gyx/30min)
 
 
 ------------------------------
