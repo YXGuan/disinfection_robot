@@ -1,0 +1,25 @@
+{
+    "name": "node-red-project",
+    "description": "A Node-RED Project",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "node-red-contrib-camerapi": "0.0.39",
+        "node-red-contrib-play-audio-file": "0.0.1",
+        "node-red-contrib-python-function": "0.0.5",
+        "node-red-contrib-python3-function": "0.0.4",
+        "node-red-contrib-pythonshell": "~1.5.4",
+        "node-red-contrib-time-controller": "0.0.5",
+        "node-red-contrib-time-switch": "~1.0.8",
+        "node-red-contrib-timed-counter": "0.0.4",
+        "node-red-contrib-ui-media": "~1.2.0",
+        "node-red-contrib-usbcamera": "0.0.6",
+        "node-red-dashboard": "~2.26.2",
+        "node-red-node-arduino": "~0.3.1",
+        "node-red-node-base64": "~0.2.1",
+        "node-red-node-email": "~1.8.3",
+        "node-red-node-pi-gpio": "~1.2.3",
+        "node-red-node-rbe": "~0.2.9",
+        "thingzi-logic-timers": "~1.1.3"
+    }
+}

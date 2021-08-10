@@ -1,0 +1,25 @@
+10 Aug 17:14:56 - [info] Node-RED version: v1.0.6
+10 Aug 17:14:56 - [info] Node.js  version: v10.21.0
+10 Aug 17:14:56 - [info] Linux 5.4.79-v7l+ arm LE
+10 Aug 17:14:58 - [info] Loading palette nodes
+10 Aug 17:15:05 - [info] Dashboard version 2.26.2 started at /ui
+10 Aug 17:15:13 - [info] Settings file  : /home/pi/.node-red/settings.js
+10 Aug 17:15:13 - [info] Context store  : 'default' [module=memory]
+10 Aug 17:15:13 - [info] User directory : /home/pi/.node-red
+10 Aug 17:15:13 - [warn] Projects disabled : editorTheme.projects.enabled=false
+10 Aug 17:15:13 - [info] Flows file     : /home/pi/.node-red/flows_pi.json
+10 Aug 17:15:13 - [info] Server now running at http://127.0.0.1:1880/
+10 Aug 17:15:13 - [warn]
+---------------------------------------------------------------------
+Your flow credentials file is encrypted using a system-generated key.
+If the system-generated key is lost for any reason, your credentials
+file will not be recoverable, you will have to delete it and re-enter
+your credentials.
+You should set your own key using the 'credentialSecret' option in
+your settings file. Node-RED will then re-encrypt your credentials
+file using your chosen key the next time you deploy a change.
+---------------------------------------------------------------------
+10 Aug 17:15:13 - [info] Starting flows
+10 Aug 17:15:14 - [info] test
+10 Aug 17:15:14 - [info] Started flows
+10 Aug 17:15:14 - [error] [arduino-board:d4825fb1.46b48] port not found : /dev/ttyUSB0
