@@ -1,21 +1,15 @@
 /**
- * Copyright JS Foundation and other contributors, http://js.foundation
+ * This is the default settings file provided by Node-RED.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * It can contain any valid JavaScript code that will get run when Node-RED
+ * is started.
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * Lines that start with // are commented out.
+ * Each entry should be separated from the entries above and below by a comma ','
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * For more information about individual settings, refer to the documentation:
+ *    https://nodered.org/docs/user-guide/runtime/configuration
  **/
-
-// The `https` setting requires the `fs` module. Uncomment the following
-// to make it available:
 var fs = require("fs");
 
 module.exports = {
@@ -47,7 +41,17 @@ module.exports = {
 
     // Timeout in milliseconds for HTTP request connections
     //  defaults to 120 seconds
-    httpRequestTimeout: 120000,
+    //httpRequestTimeout: 120000,
+
+    // Maximum buffer size for the exec node
+    //  defaults to 10Mb
+    //execMaxBufferSize: 10000000,
+
+    // Timeout in milliseconds for inbound WebSocket connections that do not
+    // match any configured node.
+    //  defaults to 5000
+    //inboundWebSocketTimeout: 5000
+
 
     // The maximum length, in characters, of any message sent to the debug sidebar tab
     debugMaxLength: 1000,
@@ -114,42 +118,63 @@ module.exports = {
 
     // If you installed the optional node-red-dashboard you can set it's path
     // relative to httpRoot
+    // Other optional properties include
+    //  readOnly:{boolean},
+    //  middleware:{function or array}, (req,res,next) - http middleware
+    //  ioMiddleware:{function or array}, (socket,next) - socket.io middleware
     //ui: { path: "ui" },
 
     // Securing Node-RED
     // -----------------
     // To password protect the Node-RED editor and admin API, the following
     // property can be used. See http://nodered.org/docs/security.html for details.
-    adminAuth: {
+adminAuth: {
         type: "credentials",
         users: [{
             username: "admin",
             password: "admin",
             permissions: "*"
         }]
-    },
+   },
 
     // To password protect the node-defined HTTP endpoints (httpNodeRoot), or
     // the static content (httpStatic), the following properties can be used.
     // The pass field is a bcrypt hash of the password.
     // See http://nodered.org/docs/security.html#generating-the-password-hash
     httpNodeAuth: {user:"user",pass:"admin"},
-    httpStaticAuth: {user:"user",pass:"admin."},
+    httpStaticAuth: {user:"user",pass:"admin"},
 
     // The following property can be used to enable HTTPS
     // See http://nodejs.org/api/https.html#https_https_createserver_options_requestlistener
     // for details on its contents.
-    // See the comment at the top of this file on how to load the `fs` module used by
-    // this setting.
-    //
-//    https: {
-//        key: fs.readFileSync('privatekey.pem'),
-//        cert: fs.readFileSync('certificate.pem')
-//    },
+    // This property can be either an object, containing both a (private) key and a (public) certificate,
+    // or a function that returns such an object:
+//https object:
+https: {
+	key: require("fs").readFileSync('~/.node-red/privkey.pem'),
+	cert: require("fs").readFileSync('~/.node-red/cert.pem')
+},
+//https function:
+//https: function() {
+    // This function should return the options object, or a Promise
+    //     // that resolves to the options object
+   //  return {
+      //   key: require("fs").readFileSync('privkey.pem'),
+    //     cert: require("fs").readFileSync('cert.pem')
+  //    }
+//  },
+
+    // The following property can be used to refresh the https settings at a
+    // regular time interval in hours.
+    // This requires:
+    //   - the `https` setting to be a function that can be called to get
+    //     the refreshed settings.
+    //   - Node.js 11 or later.
+//httpsRefreshInterval : 12,
 
     // The following property can be used to cause insecure HTTP connections to
     // be redirected to HTTPS.
-   // requireHttps: true,
+//requireHttps: true,
 
     // The following property can be used to disable the editor. The admin API
     // is not affected by this option. To disable both the editor and the admin
@@ -175,12 +200,24 @@ module.exports = {
     // The following property can be used to add a custom middleware function
     // in front of all http in nodes. This allows custom authentication to be
     // applied to all http in nodes, or any other sort of common request processing.
+    // It can be a single function or an array of middleware functions.
     //httpNodeMiddleware: function(req,res,next) {
     //    // Handle/reject the request, or pass it on to the http in node by calling next();
     //    // Optionally skip our rawBodyParser by setting this to true;
     //    //req.skipRawBodyParser = true;
     //    next();
     //},
+
+
+    // The following property can be used to add a custom middleware function
+    // in front of all admin http routes. For example, to set custom http
+    // headers. It can be a single function or an array of middleware functions.
+    // httpAdminMiddleware: function(req,res,next) {
+    //    // Set the X-Frame-Options header to limit where the editor
+    //    // can be embedded
+    //    //res.set('X-Frame-Options', 'sameorigin');
+    //    next();
+    // },
 
     // The following property can be used to pass custom options to the Express.js
     // server used by Node-RED. For a full list of available options, refer
@@ -218,6 +255,10 @@ module.exports = {
         // jfive:require("johnny-five"),
         // j5board:require("johnny-five").Board({repl:false})
     },
+
+    // Allow the Function node to load additional npm modules
+    functionExternalModules: false,
+
     // `global.keys()` returns a list of all properties set in global context.
     // This allows them to be displayed in the Context Sidebar within the editor.
     // In some circumstances it is not desirable to expose them to the editor. The
@@ -227,6 +268,8 @@ module.exports = {
     // their values. Setting this to true will cause the keys to be listed.
     exportGlobalContextKeys: false,
 
+    // Uncomment the following to run node-red in your preferred language:
+    // lang: "de",
 
     // Context Storage
     // The following property can be used to enable context storage. The configuration
@@ -265,15 +308,42 @@ module.exports = {
         }
     },
 
+    // Configure how the runtime will handle external npm modules.
+    // This covers:
+    //  - whether the editor will allow new node modules to be installed
+    //  - whether nodes, such as the Function node are allowed to have their
+    //    own dynamically configured dependencies.
+    // The allow/denyList options can be used to limit what modules the runtime
+    // will install/load. It can use '*' as a wildcard that matches anything.
+    externalModules: {
+        // autoInstall: false,   // Whether the runtime will attempt to automatically install missing modules
+        // autoInstallRetry: 30, // Interval, in seconds, between reinstall attempts
+        // palette: {              // Configuration for the Palette Manager
+        //     allowInstall: true, // Enable the Palette Manager in the editor
+        //     allowUpload: true,  // Allow module tgz files to be uploaded and installed
+        //     allowList: [],
+        //     denyList: []
+        // },
+        // modules: {              // Configuration for node-specified modules
+        //     allowInstall: true,
+        //     allowList: [],
+        //     denyList: []
+        // }
+    },
+
     // Customising the editor
     editorTheme: {
-        menu: { "menu-item-help": {
-            label: "Node-RED Pi Website",
-            url: "http://nodered.org/docs/hardware/raspberrypi.html"
-        } },
         projects: {
             // To enable the Projects feature, set this value to true
-            enabled: false
+            enabled: false,
+            workflow: {
+                // Set the default projects workflow mode.
+                //  - manual - you must manually commit changes
+                //  - auto - changes are automatically committed
+                // This can be overridden per-user from the 'Git config'
+                // section of 'User Settings' within the editor
+                mode: "manual"
+            }
         }
     }
 }
